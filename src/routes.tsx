@@ -1,4 +1,5 @@
 import Layout from './components/Layout';
+import CartPage from './pages/CartPage';
 
 import HomePage from './pages/HomePage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -11,7 +12,7 @@ const routes = [
       { path: '/', element: <HomePage /> },
       { path: '/products', element: <ProductListPage /> },
       { path: '/products/:id', element: <ProductDetailPage /> },
-      // { path: '/cart', element: <CartPage /> },
+      { path: '/cart', element: <CartPage /> },
       // { path: '/order', element: <OrderPage /> },
       // { path: '/order/complete', element: <OrderPage /> },
       // { path: '/orders', element: <OrderPage /> },

@@ -43,6 +43,9 @@ export default function Header() {
               }
             </ul>
           </li>
+          <li>
+            <NavLink to="/cart">Cart</NavLink>
+          </li>
         </ul>
       </nav>
     </Container>

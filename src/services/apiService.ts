@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { Category, ProductDetail, ProductSummary } from '../types';
+import {
+  Cart, Category, ProductDetail, ProductSummary,
+} from '../types';
 
 const BaseUrl = process.env.REACT_APP_API_BASE_URL || 'localhost:3000/';
 
@@ -25,6 +27,11 @@ export default class ApiService {
     const { data } = await this.instance.get('/categories');
     const { categories } = data;
     return categories;
+  }
+
+  async fetchCart():Promise<Cart> {
+    const { data } = await this.instance.get('/cart');
+    return data;
   }
 }
 
