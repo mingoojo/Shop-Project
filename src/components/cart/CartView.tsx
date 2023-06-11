@@ -2,28 +2,27 @@ import styled from 'styled-components';
 import { Cart } from '../../types';
 import LineItemView from './LineItemView';
 
-const Container = styled.div`
-  table {
-    width: 100%;
-  }
+type CartViewProps ={
+  cart : Cart
+}
 
-  th, td {
-    padding: .5rem;
-    text-align: left;
-  }
+const Container = styled.div`
+table{
+  width: 100%;
+}
+th,td{
+  padding: .5rem;
+  text-align: left;
+  border:  2px solid #222;
+}
 `;
 
-type CartViewProps = {
-  cart: Cart
-};
-
-export default function CartView({ cart }: CartViewProps) {
-  if (!cart.lineItems.length) {
+export default function CartView({ cart }:CartViewProps) {
+  if (!cart) {
     return (
-      <p>장바구니가 비었습니다</p>
+      <p>장바구니가 비었습니다.</p>
     );
   }
-
   return (
     <Container>
       <table>
@@ -36,12 +35,11 @@ export default function CartView({ cart }: CartViewProps) {
           </tr>
         </thead>
         <tbody>
-          {cart.lineItems.map((lineItem) => (
-            <LineItemView
-              key={lineItem.id}
-              lineItem={lineItem}
-            />
-          ))}
+          {
+            cart.lineItems.map((lineItem) => (
+              <LineItemView key={lineItem.id} lineItem={lineItem} />
+            ))
+          }
         </tbody>
         <tfoot>
           <tr>
@@ -49,7 +47,7 @@ export default function CartView({ cart }: CartViewProps) {
               합계
             </th>
             <td>
-              {cart.totalPrice}
+              {cart.totalPrice.toLocaleString()}
               원
             </td>
           </tr>

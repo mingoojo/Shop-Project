@@ -1,6 +1,6 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import { apiService } from '../services/apiService';
+import apiService from '../apiService/ApiService';
 import { ProductSummary } from '../types';
 
 @singleton()
@@ -8,14 +8,14 @@ import { ProductSummary } from '../types';
 export default class ProductsStore {
   products:ProductSummary[] = [];
 
-  async fetchProducts({ categoryId }:{categoryId?:string}) {
+  async fetchProducts({ categoryId }:{categoryId:string}) {
     this.setProducts([]);
     const products = await apiService.fetchProducts({ categoryId });
     this.setProducts(products);
   }
 
   @Action()
-  setProducts(products : ProductSummary[]) {
-    this.products = products;
+  setProducts(payload:ProductSummary[]) {
+    this.products = payload;
   }
 }

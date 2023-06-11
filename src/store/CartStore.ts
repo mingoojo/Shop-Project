@@ -1,21 +1,21 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import { apiService } from '../services/apiService';
-import { Cart, ProductSummary } from '../types';
+import apiService from '../apiService/ApiService';
+import { Cart, nullCart } from '../types';
 
 @singleton()
 @Store()
 export default class CartStore {
-  cart : Cart | null = null;
+  cart: Cart = nullCart;
 
   async fetchCart() {
-    this.setCart(null);
+    this.setCart(nullCart);
     const cart = await apiService.fetchCart();
     this.setCart(cart);
   }
 
   @Action()
-  setCart(cart:Cart|null) {
-    this.cart = cart;
+  setCart(payload:Cart) {
+    this.cart = payload;
   }
 }

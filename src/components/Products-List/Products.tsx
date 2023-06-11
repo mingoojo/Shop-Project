@@ -8,24 +8,25 @@ type ProductsProps = {
 }
 
 const Container = styled.div`
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  li{
-    width: 20%;
-    padding: 1rem;
-  }
-  a{
-    text-decoration: none;
-    display: block;
-  }
+ul{
+  display: flex;
+  flex-wrap: wrap;
+}
+li{
+  width: 20%;
+  padding: 1rem;
+}
+a{
+  display: block;
+  text-decoration: none;
+}
 `;
 
 export default function Products({ products }:ProductsProps) {
   return (
     <Container>
       <ul>
+
         {
           products.map((product) => (
             <li key={product.id}>

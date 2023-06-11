@@ -80,6 +80,10 @@ export type OrderSummary = {
   orderedAt: string;
 }
 
+export type ChangeFunction = ({ optionId, optionItemId }:{
+  optionId:string, optionItemId:string
+}) => void
+
 export type OrderDetail = {
   id: string;
   title: string;
@@ -96,4 +100,9 @@ export const nullOrderDetail: OrderDetail = {
   totalPrice: 0,
   status: '',
   orderedAt: '',
+};
+
+export const nullCart:Cart = {
+  lineItems: [],
+  totalPrice: 0,
 };

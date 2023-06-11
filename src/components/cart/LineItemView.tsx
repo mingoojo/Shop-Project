@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { LineItem } from '../../types';
-import Options from './Option';
+import Options from './Options';
 
 type LineItemViewProps = {
-  lineItem: LineItem;
-};
+  lineItem : LineItem
+}
 
-export default function LineItemView({ lineItem }: LineItemViewProps) {
+export default function LineItemView({ lineItem }:LineItemViewProps) {
   return (
     <tr>
       <td>
@@ -16,12 +16,15 @@ export default function LineItemView({ lineItem }: LineItemViewProps) {
         <Options options={lineItem.options} />
       </td>
       <td>
-        {lineItem.unitPrice}
+        {lineItem.unitPrice.toLocaleString()}
         원
       </td>
-      <td>{lineItem.quantity}</td>
       <td>
-        {lineItem.totalPrice}
+        {lineItem.quantity}
+        개
+      </td>
+      <td>
+        {lineItem.totalPrice.toLocaleString()}
         원
       </td>
     </tr>

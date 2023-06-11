@@ -1,12 +1,12 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import { apiService } from '../services/apiService';
+import apiService from '../apiService/ApiService';
 import { nullProductDetail, ProductDetail } from '../types';
 
 @singleton()
 @Store()
-export default class ProductDetailStore {
-  product: ProductDetail = nullProductDetail;
+export default class ProductStore {
+  product:ProductDetail = nullProductDetail;
 
   loading = true;
 
@@ -14,7 +14,6 @@ export default class ProductDetailStore {
 
   async fetchProduct({ productId }:{productId:string}) {
     this.startLoading();
-
     try {
       const product = await apiService.fetchProduct({ productId });
       this.setProduct(product);

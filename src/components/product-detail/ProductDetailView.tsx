@@ -1,21 +1,22 @@
 import styled from 'styled-components';
-import useProductDetailStore from '../../hooks/useProductDetailStore';
+import useProductStore from '../../hooks/useProductStore';
+import AddToCartForm from './AddToCartForm';
 import Description from './Description';
 import Images from './Images';
 
 const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  aside{
-    width: 38%;
-  }
-  article{
-    width: 60%;
-  }
+display: flex;
+justify-content: space-between;
+aside{
+  width: 38%;
+}
+article{
+  width: 60%;
+}
 `;
 
-export default function ProductDetail() {
-  const [{ product }] = useProductDetailStore();
+export default function ProductDetailView() {
+  const [{ product }] = useProductStore();
   return (
     <Container>
       <aside>
@@ -23,7 +24,7 @@ export default function ProductDetail() {
       </aside>
       <article>
         <h2>{product.name}</h2>
-        {/* <AddToCartForm /> */}
+        <AddToCartForm />
         <Description value={product.description} />
       </article>
     </Container>

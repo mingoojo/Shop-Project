@@ -1,18 +1,19 @@
-import { useEffect } from 'react';
 import { container } from 'tsyringe';
+import { useEffectOnce } from 'usehooks-ts';
 import { useStore } from 'usestore-ts';
-import CategoriesStore from '../stores/CategoriesStore';
+import CategoriesStore from '../store/CategoriesStore';
 import { Category } from '../types';
 
-export default function useFetchCategories():{categories : Category[]} {
+export default function useFetchCategories(): {
+  categories: Category[];
+  } {
   const store = container.resolve(CategoriesStore);
+
   const [{ categories }] = useStore(store);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     store.fetchCategories();
-  }, [store]);
+  });
 
-  return {
-    categories,
-  };
+  return { categories };
 }

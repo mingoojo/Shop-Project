@@ -1,6 +1,6 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import { apiService } from '../services/apiService';
+import apiService from '../apiService/ApiService';
 import { Category } from '../types';
 
 @singleton()
@@ -15,7 +15,7 @@ export default class CategoriesStore {
   }
 
   @Action()
-  setCategories(categories:Category[]) {
-    this.categories = categories;
+  setCategories(payload:Category[]) {
+    this.categories = payload;
   }
 }
