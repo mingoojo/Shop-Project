@@ -21,7 +21,7 @@ export default function Header() {
   const { categories } = useFetchCategories();
   const { accessToken } = useAccessToken();
   const handleClickLogout = () => {
-    //
+    // 123
   };
   return (
     <Container>
