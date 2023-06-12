@@ -2,6 +2,7 @@ import Layout from './components/Layout';
 import CartPage from './pages/CartPage';
 
 import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ProductListPage from './pages/ProductListPage';
 
@@ -17,7 +18,7 @@ const routes = [
       // { path: '/order/complete', element: <OrderPage /> },
       // { path: '/orders', element: <OrderPage /> },
       // { path: '/orders/:id', element: <OrderPage /> },
-      // { path: '/login', element: <LoginPage /> },
+      { path: '/login', element: <LoginPage /> },
       // { path: '/signup', element: <SignUpPage /> },
       // { path: '/signup/complete', element: <SignUpPage /> },
     ],

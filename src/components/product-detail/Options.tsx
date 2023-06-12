@@ -9,7 +9,6 @@ export default function Options() {
   };
   return (
     <div>
-      123
       {options.map((option, index) => (
         <Option
           key={option.id}
