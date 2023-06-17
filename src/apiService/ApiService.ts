@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  Cart, Category, ProductDetail, ProductSummary,
+  Cart, Category, OrderDetail, OrderSummary, ProductDetail, ProductSummary,
 } from '../types';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://shop-demo-api-02.fly.dev';
@@ -64,6 +64,35 @@ class ApiService {
     const { data } = await this.instance.post('/session', { email, password });
     const { accessToken } = data;
     return accessToken;
+  }
+
+  async logout():Promise<void> {
+    await this.instance.delete('/session');
+  }
+
+  async signup({ email, name, password }:{
+    email :string,
+    name : string,
+    password: string
+  }):Promise<string> {
+    const { data } = await this.instance.post('/users', {
+      email, name, password,
+    });
+    const { accessToken } = data;
+    return accessToken;
+  }
+
+  async fetchOrders():Promise<OrderSummary[]> {
+    const { data } = await this.instance.get('/orders');
+    const { orders } = data;
+    return orders;
+  }
+
+  async fetchOrder({ orderId }:{
+    orderId:string
+  }):Promise<OrderDetail> {
+    const { data } = await this.instance.get(`/orders/${orderId}`);
+    return data;
   }
 }
 

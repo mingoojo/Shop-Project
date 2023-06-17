@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useAccessToken from '../../hooks/useAccessToken';
 import useLoginFormStore from '../../hooks/useLoginFormStore';
@@ -9,9 +10,11 @@ const Container = styled.div``;
 
 export default function LoginForm() {
   const { setAccessToken } = useAccessToken();
+
   const [{
     email, password, valid, error, accessToken,
   }, store] = useLoginFormStore();
+
   useEffect(() => {
     if (accessToken) {
       setAccessToken(accessToken);
@@ -49,6 +52,11 @@ export default function LoginForm() {
         <Button type="submit" disabled={!valid}>
           login
         </Button>
+        <p>
+          <Link to="/signup">
+            회원가입
+          </Link>
+        </p>
         {
           error && (
             <p>로그인 실패</p>

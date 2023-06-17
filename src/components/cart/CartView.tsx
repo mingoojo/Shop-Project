@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Cart } from '../../types';
+import Button from '../Ui/Button';
 import LineItemView from './LineItemView';
 
 type CartViewProps ={
@@ -18,11 +20,16 @@ th,td{
 `;
 
 export default function CartView({ cart }:CartViewProps) {
+  const navigate = useNavigate();
+
   if (!cart) {
     return (
       <p>장바구니가 비었습니다.</p>
     );
   }
+  const handleClick = () => {
+    navigate('/order');
+  };
   return (
     <Container>
       <table>
@@ -53,6 +60,9 @@ export default function CartView({ cart }:CartViewProps) {
           </tr>
         </tfoot>
       </table>
+      <Button onClick={handleClick}>
+        주문하기
+      </Button>
     </Container>
   );
 }

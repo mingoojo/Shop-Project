@@ -13,7 +13,7 @@ const Container = styled.div`
 
   label {
     display: inline-block;
-    width: 10rem;
+    width: 15rem;
     margin-right: .5rem;
     text-align: right;
     vertical-align: middle;
