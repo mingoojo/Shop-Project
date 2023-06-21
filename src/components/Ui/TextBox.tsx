@@ -1,19 +1,14 @@
-import { useRef } from 'react';
+/* eslint-disable react/require-default-props */
+import React, { useRef } from 'react';
+
 import styled from 'styled-components';
 
-type TextBoxProps = {
-  label: string;
-  placeholder?: string;
-  type?: 'text' | 'number' | 'password'; // ← 계속해서 지원할 타입을 쭉 써주자.
-  value: string;
-  onChange: (value: string) => void;
-}
 const Container = styled.div`
   margin-block: .5rem;
 
   label {
     display: inline-block;
-    width: 15rem;
+    width: 10rem;
     margin-right: .5rem;
     text-align: right;
     vertical-align: middle;
@@ -24,13 +19,28 @@ const Container = styled.div`
   }
 `;
 
+type TextBoxProps = {
+  label: string;
+  placeholder?: string;
+  type?: 'text' | 'number' | 'password' | 'tel'; // ...and more types...
+  value: string;
+  onChange?: (value: string) => void;
+  readOnly?: boolean;
+}
+
 export default function TextBox({
-  label, placeholder = undefined, type = 'text', value, onChange,
-}:TextBoxProps) {
+  label, placeholder = undefined, type = 'text', value,
+  onChange = undefined, readOnly = false,
+}: TextBoxProps) {
   const id = useRef(`textbox-${Math.random().toString().slice(2)}`);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!onChange) {
+      return;
+    }
     onChange(event.target.value);
   };
+
   return (
     <Container>
       <label htmlFor={id.current}>
@@ -42,6 +52,7 @@ export default function TextBox({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        readOnly={readOnly}
       />
     </Container>
   );

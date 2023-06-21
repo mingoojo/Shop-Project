@@ -1,7 +1,16 @@
-export default function SignUpCompletePage() {
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function SignupComPletePage() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/');
+    }, 5000);
+  }, []);
   return (
     <div>
-      <p>회원가입이 완료되었습니다.</p>
+      가입완료
     </div>
   );
 }

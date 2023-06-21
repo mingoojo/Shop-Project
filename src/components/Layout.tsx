@@ -1,11 +1,22 @@
 import { Outlet } from 'react-router-dom';
-import Header from './defaults/Header';
+import styled from 'styled-components';
+import Header from './default/Header';
+import Footer from './default/Footer';
+import useCheckAccessToken from '../hooks/useCheckAccessToken';
+
+const Container = styled.div`
+/* border: 2px solid #222; */
+max-width: 840px;
+margin: auto;
+`;
 
 export default function Layout() {
+  useCheckAccessToken();
   return (
-    <div>
+    <Container>
       <Header />
       <Outlet />
-    </div>
+      <Footer />
+    </Container>
   );
 }

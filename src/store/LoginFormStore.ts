@@ -4,7 +4,6 @@ import apiService from '../apiService/ApiService';
 
 @singleton()
 @Store()
-
 export default class LoginFormStore {
   email = '';
 
@@ -14,30 +13,23 @@ export default class LoginFormStore {
 
   accessToken = '';
 
-  async login() {
-    try {
-      const accessToken = await apiService.login({
-        email: this.email,
-        password: this.password,
-      });
-      this.setAccessToken(accessToken);
-    } catch (error) {
-      this.setError();
-    }
-  }
-
   get valid() {
     return this.email.includes('@') && !!this.password;
   }
 
   @Action()
-  changeEmail(email:string) {
-    this.email = email;
+  changeEmail(payload: string) {
+    this.email = payload;
   }
 
   @Action()
-  changePassword(password:string) {
-    this.password = password;
+  changePassword(payload: string) {
+    this.password = payload;
+  }
+
+  @Action()
+  setAccessToken(accessToken: string) {
+    this.accessToken = accessToken;
   }
 
   @Action()
@@ -46,15 +38,22 @@ export default class LoginFormStore {
   }
 
   @Action()
-  setAccessToken(accessToken:string) {
-    this.accessToken = accessToken;
-  }
-
-  @Action()
   reset() {
     this.email = '';
     this.password = '';
-    this.accessToken = '';
     this.error = false;
+    this.accessToken = '';
+  }
+
+  async login() {
+    try {
+      const accessToken = await apiService.login({
+        email: this.email,
+        password: this.password,
+      });
+      this.setAccessToken(accessToken);
+    } catch (err) {
+      this.setError();
+    }
   }
 }

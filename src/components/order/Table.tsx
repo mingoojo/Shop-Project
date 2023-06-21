@@ -1,29 +1,24 @@
 import styled from 'styled-components';
 import { LineItem } from '../../types';
-import LineItemView from '../Cart/LineItemView';
-
-const Container = styled.div`
-  table {
-    margin-block: 1rem;
-    width: 100%;
-  }
-
-  th, td {
-    padding: .5rem;
-    text-align: left;
-  }
-`;
+import LineItemView from '../cart/LineItemView';
 
 type TableProps = {
-  lineItems: LineItem[];
-  totalPrice: number;
-};
+  totalPrice : number
+  lineItems : LineItem[]
+}
 
-export default function Table({ lineItems, totalPrice }: TableProps) {
-  if (!lineItems.length) {
-    return null;
-  }
+const Container = styled.div`
+table{
+  width: 100%;
+}
+td,th{
+  padding: 0.5rem;
+  text-align: left;
+}
+  
+`;
 
+export default function Table({ totalPrice, lineItems }:TableProps) {
   return (
     <Container>
       <table>
@@ -36,20 +31,19 @@ export default function Table({ lineItems, totalPrice }: TableProps) {
           </tr>
         </thead>
         <tbody>
-          {lineItems.map((lineItem) => (
-            <LineItemView
-              key={lineItem.id}
-              lineItem={lineItem}
-            />
-          ))}
+          {
+            lineItems.map((lineItem) => (
+              <LineItemView key={lineItem.id} lineItem={lineItem} />
+            ))
+          }
         </tbody>
         <tfoot>
           <tr>
-            <th colSpan={3}>
+            <td colSpan={3}>
               합계
-            </th>
+            </td>
             <td>
-              {(totalPrice).toLocaleString()}
+              {totalPrice.toLocaleString()}
               원
             </td>
           </tr>

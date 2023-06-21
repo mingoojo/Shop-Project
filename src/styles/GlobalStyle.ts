@@ -18,18 +18,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-size: 1.6rem;
     background: ${(props) => props.theme.colors.background};
-    color: ${(props) => props.theme.colors.text};
-  }
-
-  a{
-    color : ${((props) => (props.theme.colors.text))}
-  }
-
-  input,
-  textarea,
-  select,
-  button{
-    font-size: 1em;
+    color: ${(props) => props.theme.colors.text}
   }
 
   :lang(ko) {

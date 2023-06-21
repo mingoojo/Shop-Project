@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import useProductFormStore from '../../hooks/useProductFormStore';
-import Button from '../Ui/Button';
+import Button from '../ui/Button';
 
 const Container = styled.div`
-  margin-top: 1rem;
+
 `;
 
 export default function Quantity() {
   const [{ quantity }, store] = useProductFormStore();
 
   const handleClickDec = () => {
-    store.changeQuantity(quantity - 1);
+    store.setQuantity(quantity - 1);
   };
-  const handleClickInc = () => {
-    store.changeQuantity(quantity + 1);
+
+  const handelClickInk = () => {
+    store.setQuantity(quantity + 1);
   };
 
   return (
@@ -21,8 +22,8 @@ export default function Quantity() {
       <Button onClick={handleClickDec}>
         -
       </Button>
-      <input type="text" readOnly value={quantity} />
-      <Button onClick={handleClickInc}>
+      <input type="input" readOnly value={quantity} />
+      <Button onClick={handelClickInk}>
         +
       </Button>
     </Container>

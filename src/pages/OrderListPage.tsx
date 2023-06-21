@@ -1,11 +1,12 @@
-import Orders from '../components/orders/Orders';
+import Orders from '../components/order-list/Orders';
 import useFetchOrders from '../hooks/useFetchOrders';
 
 export default function OrderListPage() {
   const { orders } = useFetchOrders();
+  console.log(orders);
   return (
     <div>
-      <h2>주문목록</h2>
+      <h2>주문 목록</h2>
       <Orders orders={orders} />
     </div>
   );

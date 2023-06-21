@@ -1,10 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { Cart } from '../../types';
-import Button from '../Ui/Button';
 import LineItemView from './LineItemView';
+import Button from '../ui/Button';
 
-type CartViewProps ={
+type CartViewProps={
   cart : Cart
 }
 
@@ -12,24 +12,28 @@ const Container = styled.div`
 table{
   width: 100%;
 }
-th,td{
-  padding: .5rem;
+td,th{
+  padding: 0.5rem;
   text-align: left;
-  border:  2px solid #222;
 }
+  
 `;
 
 export default function CartView({ cart }:CartViewProps) {
   const navigate = useNavigate();
-
-  if (!cart) {
+  if (!cart.lineItems.length) {
     return (
-      <p>장바구니가 비었습니다.</p>
+      <div>
+        <h2>장바구니</h2>
+        <p>장바구니가 비어있습니다.</p>
+      </div>
     );
   }
+
   const handleClick = () => {
     navigate('/order');
   };
+
   return (
     <Container>
       <table>
@@ -50,9 +54,9 @@ export default function CartView({ cart }:CartViewProps) {
         </tbody>
         <tfoot>
           <tr>
-            <th colSpan={3}>
+            <td colSpan={3}>
               합계
-            </th>
+            </td>
             <td>
               {cart.totalPrice.toLocaleString()}
               원

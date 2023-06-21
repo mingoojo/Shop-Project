@@ -1,9 +1,9 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import apiService from '../apiService/ApiService';
 import {
-  nullProductDetail, ProductDetail, ProductOption, ProductOptionItem,
+  ProductDetail, ProductOption, ProductOptionItem, nullProductDetail,
 } from '../types';
+import apiService from '../apiService/ApiService';
 
 @singleton()
 @Store()
@@ -12,11 +12,11 @@ export default class ProductFormStore {
 
   productId = '';
 
-  options: ProductOption[] = [];
+  quantity = 1;
+
+  options:ProductOption[] = [];
 
   selectedOptionItems: ProductOptionItem[] = [];
-
-  quantity = 1;
 
   done = false;
 
@@ -34,12 +34,28 @@ export default class ProductFormStore {
   }
 
   @Action()
+  setQuantity(quantity:number) {
+    if (quantity <= 0) {
+      return;
+    }
+    if (quantity > 10) {
+      return;
+    }
+    this.quantity = quantity;
+  }
+
+  @Action()
   setProduct(product:ProductDetail) {
     this.product = product;
     this.productId = product.id;
     this.options = product.options;
-    this.selectedOptionItems = this.options.map((i) => i.items[0]);
     this.quantity = 1;
+    this.done = false;
+    this.selectedOptionItems = this.options.map((option) => (option.items[0]));
+  }
+
+  @Action()
+  resetDone() {
     this.done = false;
   }
 
@@ -50,32 +66,17 @@ export default class ProductFormStore {
   }
 
   @Action()
-  resetDone() {
-    this.done = false;
-  }
-
-  @Action()
-  changeOptionItem({ optionId, optionItemId }: {
-  optionId: string;
-  optionItemId: string;
-}) {
+  changeOptionItem({ optionId, optionItemId }:{
+    optionId:string
+    optionItemId:string
+  }) {
     this.selectedOptionItems = this.product.options.map((option, index) => {
       const item = this.selectedOptionItems[index];
       return option.id !== optionId
         ? item
         : option.items.find((i) => i.id === optionItemId) ?? item;
     });
-  }
-
-  @Action()
-  changeQuantity(payload:number) {
-    if (payload <= 0) {
-      return;
-    }
-    if (payload > 10) {
-      return;
-    }
-    this.quantity = payload;
+    console.log(this.selectedOptionItems);
   }
 
   get price() {

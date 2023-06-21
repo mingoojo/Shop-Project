@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import SignupForm from '../components/signup/SignupForm';
 import useSignupFormStore from '../hooks/useSignupFormStore';
 
-export default function SignUpPage() {
+export default function SignupPage() {
   const navigate = useNavigate();
   const [{ accessToken }, store] = useSignupFormStore();
   useEffect(() => {
@@ -11,7 +11,6 @@ export default function SignUpPage() {
   }, []);
   useEffect(() => {
     if (accessToken) {
-      store.reset();
       navigate('/signup/complete');
     }
   }, [accessToken]);

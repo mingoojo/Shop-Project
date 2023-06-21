@@ -1,9 +1,10 @@
-import { ChangeFunction, ProductOption, ProductOptionItem } from '../../types';
+import { ProductOption, ProductOptionItem } from '../../types';
 import ComboBox from './ComboBox';
+import { ChangeFunction } from './Options';
 
 type OptionProps = {
   option : ProductOption
-  selectedItem: ProductOptionItem
+  selectedItem : ProductOptionItem
   onChange : ChangeFunction
 }
 
@@ -19,13 +20,15 @@ export default function Option({ option, selectedItem, onChange }:OptionProps) {
     });
   };
   return (
-    <ComboBox
-      label={option.name}
-      selectedItem={selectedItem}
-      items={option.items}
-      itemToId={(item) => item.id}
-      itemToText={(item) => item.name}
-      onChange={handleChange}
-    />
+    <div>
+      <ComboBox
+        label={option.name}
+        selectedItem={selectedItem}
+        items={option.items}
+        itemToId={(item) => item.id}
+        itemToText={(item) => item.name}
+        onChange={handleChange}
+      />
+    </div>
   );
 }

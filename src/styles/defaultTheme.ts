@@ -2,7 +2,7 @@ const defaultTheme = {
   colors: {
     background: '#FFFFFF',
     text: '#000000',
-    primary: '#F00000',
+    primary: '#00f',
     secondary: '#00FFFF',
   },
 };

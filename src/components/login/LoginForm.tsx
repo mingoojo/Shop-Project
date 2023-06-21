@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import useAccessToken from '../../hooks/useAccessToken';
 import useLoginFormStore from '../../hooks/useLoginFormStore';
-import Button from '../Ui/Button';
-import TextBox from '../Ui/TextBox';
+import Button from '../ui/Button';
 
-const Container = styled.div``;
+const Container = styled.div`
+  
+`;
 
 export default function LoginForm() {
   const { setAccessToken } = useAccessToken();
-
   const [{
-    email, password, valid, error, accessToken,
+    email, password, error, valid, accessToken,
   }, store] = useLoginFormStore();
 
   useEffect(() => {
@@ -21,48 +20,39 @@ export default function LoginForm() {
     }
   }, [accessToken]);
 
-  function handleSubmit(e:React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    store.login();
-  }
-  const handleChangeEmail = (value: string) => {
-    store.changeEmail(value);
+  const handleChangeEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
+    store.changeEmail(e.target.value);
+  };
+  const handleChangePassword = (e:React.ChangeEvent<HTMLInputElement>) => {
+    store.changePassword(e.target.value);
   };
 
-  const handleChangePassword = (value: string) => {
-    store.changePassword(value);
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    store.login();
   };
 
   return (
     <Container>
       <h2>로그인</h2>
       <form onSubmit={handleSubmit}>
-        <TextBox
-          label="E-mail"
-          placeholder="tester@example.com"
-          value={email}
-          onChange={handleChangeEmail}
-        />
-        <TextBox
-          label="Password"
-          type="password"
-          value={password}
-          onChange={handleChangePassword}
-        />
+        <label>
+          E-mail
+          <input type="email" placeholder="tester@example.com" onChange={handleChangeEmail} value={email} />
+        </label>
+        <label>
+          Password
+          <input type="password" value={password} onChange={handleChangePassword} />
+        </label>
         <Button type="submit" disabled={!valid}>
-          login
+          로그인
         </Button>
-        <p>
-          <Link to="/signup">
-            회원가입
-          </Link>
-        </p>
-        {
-          error && (
-            <p>로그인 실패</p>
-          )
-        }
       </form>
+      {
+        error && (
+          <p>로그인 실패</p>
+        )
+      }
     </Container>
   );
 }

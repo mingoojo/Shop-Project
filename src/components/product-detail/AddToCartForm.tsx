@@ -1,15 +1,12 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import useAccessToken from '../../hooks/useAccessToken';
 import Options from './Options';
 import Price from './Price';
 import Quantity from './Quantity';
 import SubmitButton from './SubmitButton';
 
-const Container = styled.div`
-margin-bottom: 2rem;
-line-height: 1.8;
-`;
+const Container = styled.div``;
 
 export default function AddToCartForm() {
   const { accessToken } = useAccessToken();
@@ -23,11 +20,12 @@ export default function AddToCartForm() {
       </Container>
     );
   }
+
   return (
     <div>
       <Quantity />
-      <Options />
       <Price />
+      <Options />
       <SubmitButton />
     </div>
   );

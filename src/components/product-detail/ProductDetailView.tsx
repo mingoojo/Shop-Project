@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import useProductStore from '../../hooks/useProductStore';
-import AddToCartForm from './AddToCartForm';
-import Description from './Description';
+import useProductDetailStore from '../../hooks/useProductDetailStore';
 import Images from './Images';
+import Description from './Description';
+import AddToCartForm from './AddToCartForm';
 
 const Container = styled.div`
-display: flex;
+display:flex;
 justify-content: space-between;
 aside{
   width: 38%;
@@ -16,7 +16,7 @@ article{
 `;
 
 export default function ProductDetailView() {
-  const [{ product }] = useProductStore();
+  const [{ product }] = useProductDetailStore();
   return (
     <Container>
       <aside>

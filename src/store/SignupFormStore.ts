@@ -4,12 +4,12 @@ import apiService from '../apiService/ApiService';
 
 @singleton()
 @Store()
-export default class SignupFormStore {
+export default class signupFormStore {
   email = '';
 
-  name = '';
-
   password = '';
+
+  name = '';
 
   passwordConfirmation = '';
 
@@ -17,28 +17,35 @@ export default class SignupFormStore {
 
   accessToken = '';
 
+  get valid() {
+    return this.email.includes('@')
+      && !!this.name
+      && this.password.length >= 4
+      && this.password === this.passwordConfirmation;
+  }
+
   @Action()
-  changeEmail(email : string) {
+  changeEmail(email:string) {
     this.email = email;
   }
 
   @Action()
-  changePassword(password : string) {
-    this.password = password;
-  }
-
-  @Action()
-  changeName(name : string) {
+  changeName(name:string) {
     this.name = name;
   }
 
   @Action()
-  changePasswordConfirmation(passwordConfirmation : string) {
-    this.passwordConfirmation = passwordConfirmation;
+  changePassword(password:string) {
+    this.password = password;
   }
 
   @Action()
-  setAccessToken(accessToken : string) {
+  changePasswordConfirmation(password:string) {
+    this.passwordConfirmation = password;
+  }
+
+  @Action()
+  setAccessToken(accessToken:string) {
     this.accessToken = accessToken;
   }
 
@@ -50,30 +57,23 @@ export default class SignupFormStore {
   @Action()
   reset() {
     this.email = '';
-    this.name = '';
     this.password = '';
+    this.name = '';
     this.passwordConfirmation = '';
-    this.error = false;
     this.accessToken = '';
+    this.error = false;
   }
 
   async signup() {
     try {
       const accessToken = await apiService.signup({
-        email: this.email,
-        password: this.password,
         name: this.name,
+        password: this.password,
+        email: this.email,
       });
       this.setAccessToken(accessToken);
-    } catch (err) {
+    } catch (error) {
       this.setError();
     }
-  }
-
-  get valid() {
-    return this.email.includes('@')
-      && !!this.name
-      && this.password.length >= 4
-      && this.password === this.passwordConfirmation;
   }
 }

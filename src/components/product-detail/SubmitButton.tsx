@@ -1,5 +1,5 @@
 import useProductFormStore from '../../hooks/useProductFormStore';
-import Button from '../Ui/Button';
+import Button from '../ui/Button';
 
 export default function SubmitButton() {
   const [{ done }, store] = useProductFormStore();
@@ -11,6 +11,7 @@ export default function SubmitButton() {
       <p>장바구니에 담았습니다.</p>
     );
   }
+
   return (
     <Button onClick={handleClick}>
       장바구니에 담기

@@ -1,21 +1,23 @@
 import { singleton } from 'tsyringe';
 import { Action, Store } from 'usestore-ts';
-import apiService from '../apiService/ApiService';
 import { Category } from '../types';
+import apiService from '../apiService/ApiService';
 
 @singleton()
 @Store()
 export default class CategoriesStore {
-  categories:Category[] = [];
+  categories : Category[] = [];
 
   async fetchCategories() {
     this.setCategories([]);
+
     const categories = await apiService.fetchCategories();
+
     this.setCategories(categories);
   }
 
   @Action()
-  setCategories(payload:Category[]) {
-    this.categories = payload;
+  setCategories(categories:Category[]) {
+    this.categories = categories;
   }
 }

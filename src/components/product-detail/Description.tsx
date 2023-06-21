@@ -5,19 +5,14 @@ type DescriptionProps = {
 }
 
 const Container = styled.div`
- li {
+  li{
     min-height: 1rem;
     line-height: 1.4;
   }
 `;
 
 export default function Description({ value }:DescriptionProps) {
-  if (!value) {
-    return null;
-  }
-
   const lines = value.split('\n');
-
   return (
     <Container>
       <ul>

@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
-import ProductDetailView from '../components/product-detail/ProductDetailView';
 import useFetchProduct from '../hooks/useFetchProduct';
+import ProductDetailView from '../components/product-detail/ProductDetailView';
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const productId = params.id ?? '';
-  const { loading, error } = useFetchProduct({ productId });
+  const { error, loading } = useFetchProduct({ productId: String(params.id) });
   if (loading) {
     return (
       <p>loading</p>
@@ -13,10 +12,12 @@ export default function ProductDetailPage() {
   }
   if (error) {
     return (
-      <p>error</p>
+      <p>error!</p>
     );
   }
   return (
-    <ProductDetailView />
+    <div>
+      <ProductDetailView />
+    </div>
   );
 }

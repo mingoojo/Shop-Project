@@ -1,9 +1,8 @@
 import { container } from 'tsyringe';
 import { useStore } from 'usestore-ts';
-import SignupFormStore from '../store/SignupFormStore';
+import signupFormStore from '../store/SignupFormStore';
 
 export default function useSignupFormStore() {
-  const store = container.resolve(SignupFormStore);
-
+  const store = container.resolve(signupFormStore);
   return useStore(store);
 }
